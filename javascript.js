@@ -16,7 +16,7 @@ container.setAttribute('style',
     width: 550px; 
     height: 550px;
     border: 1px solid black;`);
-
+  
 const btnContainer = document.createElement('div');
 btnContainer.setAttribute('style',
     `display: flex;
@@ -26,12 +26,11 @@ btnContainer.setAttribute('style',
     justify-content: space-evenly;`)
 body.insertBefore(btnContainer, container);
 
-// Row and column value for grid
 const title = document.createElement('h1');
 title.setAttribute('style', 'font-family: montserrat, sans-serif;')
 title.textContent = "Etch-A-Sketch";
 body.insertBefore(title, btnContainer);
-// Row and column value for grid
+
 let value = 16;
 color = 'black';
 
@@ -65,23 +64,26 @@ function createGrid(value) {
     })
 }
 
+// Run function to create initial grid.
 createGrid(value);
 
-// Create a button via javascript.
+// Reset grid button.
 const resetBtn = document.createElement('button');
-resetBtn.innerText="Reset Etch-A-Sketch";
+resetBtn.innerText="Reset Grid";
 resetBtn.setAttribute('style', 
     `padding: 5px 10px; 
     margin-right: 10px;`)
 btnContainer.appendChild(resetBtn);
 
-// Button function to reset grid.
+//Function to reset grid.
 resetBtn.addEventListener('click', () => {
     document.querySelectorAll('.grid-box').forEach(box => {
         box.style.backgroundColor = 'lightgray';
     })
     promptNewGrid();
     updateGrid();
+    color = 'black';
+    colorBtn.style.setProperty('background-color','lightgrey');
 })
 
 // New Grid Value Prompt
@@ -102,17 +104,18 @@ function updateGrid() {
 }
 // Change color button.
 const colorBtn = document.createElement('button');
-colorBtn.innerText = "Change color";
+colorBtn.innerText = "Random color";
 colorBtn.setAttribute('style', 
     `padding: 5px 10px;
-    margin-right: 10px;`
+    margin-right: 10px;` 
     )
 btnContainer.appendChild(colorBtn);
 
-// Button function to change hover color
+// Function that provides a random value then assigns value as the color.
 colorBtn.addEventListener('click', ()=>{
     randomNumber = Math.floor(Math.random()*16777215).toString(16);
     color=randomNumber;
+    colorBtn.style.setProperty(`background-color`, `${color}`);
 })
 
 const rainbowBtn = document.createElement('button');
